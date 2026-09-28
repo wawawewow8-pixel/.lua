@@ -1,0 +1,226 @@
+-- BLOX FRUIT HUB | Made by ashfall
+-- Key System GUI
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ==================== CHANGE THIS LINK ANYTIME ====================
+local KeyLink = "https://g5.lu/css44"
+-- ==================================================================
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "BloxFruitHubKeySystem"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 420, 0, 260)
+mainFrame.Position = UDim2.new(0.5, -210, 0.5, -130)
+mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 12)
+mainCorner.Parent = mainFrame
+
+local mainStroke = Instance.new("UIStroke")
+mainStroke.Color = Color3.fromRGB(60, 60, 80)
+mainStroke.Thickness = 1.5
+mainStroke.Parent = mainFrame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Name = "Title"
+title.Size = UDim2.new(1, 0, 0, 45)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "BLOX FRUIT HUB"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 22
+title.Font = Enum.Font.GothamBold
+title.Parent = mainFrame
+
+-- Subtitle
+local subtitle = Instance.new("TextLabel")
+subtitle.Name = "Subtitle"
+subtitle.Size = UDim2.new(1, 0, 0, 20)
+subtitle.Position = UDim2.new(0, 0, 0, 38)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "Made by ashfall"
+subtitle.TextColor3 = Color3.fromRGB(140, 140, 160)
+subtitle.TextSize = 13
+subtitle.Font = Enum.Font.Gotham
+subtitle.Parent = mainFrame
+
+-- Key Input Box
+local keyBox = Instance.new("TextBox")
+keyBox.Name = "KeyBox"
+keyBox.Size = UDim2.new(0, 360, 0, 40)
+keyBox.Position = UDim2.new(0.5, -180, 0, 80)
+keyBox.BackgroundColor3 = Color3.fromRGB(28, 28, 38)
+keyBox.BorderSizePixel = 0
+keyBox.PlaceholderText = "Enter your key here..."
+keyBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 120)
+keyBox.Text = ""
+keyBox.TextColor3 = Color3.fromRGB(230, 230, 240)
+keyBox.TextSize = 15
+keyBox.Font = Enum.Font.Gotham
+keyBox.ClearTextOnFocus = false
+keyBox.Parent = mainFrame
+
+local keyBoxCorner = Instance.new("UICorner")
+keyBoxCorner.CornerRadius = UDim.new(0, 8)
+keyBoxCorner.Parent = keyBox
+
+local keyBoxStroke = Instance.new("UIStroke")
+keyBoxStroke.Color = Color3.fromRGB(50, 50, 70)
+keyBoxStroke.Thickness = 1
+keyBoxStroke.Parent = keyBox
+
+-- Buttons Container
+local buttonContainer = Instance.new("Frame")
+buttonContainer.Name = "ButtonContainer"
+buttonContainer.Size = UDim2.new(0, 360, 0, 45)
+buttonContainer.Position = UDim2.new(0.5, -180, 0, 145)
+buttonContainer.BackgroundTransparency = 1
+buttonContainer.Parent = mainFrame
+
+-- Check Key Button (Left)
+local checkBtn = Instance.new("TextButton")
+checkBtn.Name = "CheckKey"
+checkBtn.Size = UDim2.new(0, 170, 1, 0)
+checkBtn.Position = UDim2.new(0, 0, 0, 0)
+checkBtn.BackgroundColor3 = Color3.fromRGB(45, 120, 255)
+checkBtn.BorderSizePixel = 0
+checkBtn.Text = "Check Key"
+checkBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+checkBtn.TextSize = 15
+checkBtn.Font = Enum.Font.GothamBold
+checkBtn.Parent = buttonContainer
+
+local checkCorner = Instance.new("UICorner")
+checkCorner.CornerRadius = UDim.new(0, 8)
+checkCorner.Parent = checkBtn
+
+-- Copy Link Button (Right)
+local copyBtn = Instance.new("TextButton")
+copyBtn.Name = "CopyLink"
+copyBtn.Size = UDim2.new(0, 170, 1, 0)
+copyBtn.Position = UDim2.new(1, -170, 0, 0)
+copyBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+copyBtn.BorderSizePixel = 0
+copyBtn.Text = "Copy Link"
+copyBtn.TextColor3 = Color3.fromRGB(220, 220, 230)
+copyBtn.TextSize = 15
+copyBtn.Font = Enum.Font.GothamBold
+copyBtn.Parent = buttonContainer
+
+local copyCorner = Instance.new("UICorner")
+copyCorner.CornerRadius = UDim.new(0, 8)
+copyCorner.Parent = copyBtn
+
+-- Status Label
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Name = "Status"
+statusLabel.Size = UDim2.new(1, -40, 0, 25)
+statusLabel.Position = UDim2.new(0, 20, 0, 210)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = ""
+statusLabel.TextColor3 = Color3.fromRGB(180, 180, 200)
+statusLabel.TextSize = 13
+statusLabel.Font = Enum.Font.Gotham
+statusLabel.Parent = mainFrame
+
+-- Hover effects
+local function addHover(button, normalColor, hoverColor)
+	button.MouseEnter:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor}):Play()
+	end)
+	button.MouseLeave:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = normalColor}):Play()
+	end)
+end
+
+addHover(checkBtn, Color3.fromRGB(45, 120, 255), Color3.fromRGB(70, 145, 255))
+addHover(copyBtn, Color3.fromRGB(40, 40, 55), Color3.fromRGB(55, 55, 75))
+
+-- Copy Link functionality
+copyBtn.MouseButton1Click:Connect(function()
+	setclipboard(KeyLink)
+	statusLabel.Text = "Link copied to clipboard!"
+	statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+	
+	task.delay(2.5, function()
+		if statusLabel then
+			statusLabel.Text = ""
+		end
+	end)
+end)
+
+-- Check Key functionality (replace this with your real validation)
+checkBtn.MouseButton1Click:Connect(function()
+	local enteredKey = keyBox.Text
+	
+	if enteredKey == "" or enteredKey == "Enter your key here..." then
+		statusLabel.Text = "Please enter a key first!"
+		statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+		return
+	end
+	
+	-- ============================================
+	-- PUT YOUR REAL KEY CHECK LOGIC HERE
+	-- Example:
+	-- if enteredKey == "YOUR_VALID_KEY" then
+	--     statusLabel.Text = "Key accepted! Loading..."
+	--     statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+	--     -- load your main script here
+	-- else
+	--     statusLabel.Text = "Invalid key!"
+	--     statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+	-- end
+	-- ============================================
+	
+	statusLabel.Text = "Checking key..."
+	statusLabel.TextColor3 = Color3.fromRGB(255, 200, 80)
+	
+	-- Temporary placeholder message
+	task.wait(1)
+	statusLabel.Text = "Replace this with your real key check!"
+	statusLabel.TextColor3 = Color3.fromRGB(255, 160, 60)
+end)
+
+-- Make the GUI draggable
+local dragging = false
+local dragStart, startPos
+
+title.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
+	end
+end)
+
+title.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - dragStart
+		mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+end)
+
+print("BLOX FRUIT HUB Key System loaded | Made by ashfall")
